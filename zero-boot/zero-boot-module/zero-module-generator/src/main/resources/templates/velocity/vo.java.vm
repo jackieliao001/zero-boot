@@ -1,0 +1,31 @@
+#set ($ClassName=${entity.replace('Entity','')})
+#set ($className=${ClassName.substring(0, 1).toLowerCase()}+${ClassName.substring(1)})
+#set ($moduleName=${package.ModuleName})
+package ${projectPath}.${moduleName}.vo;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import java.io.Serializable;
+import ${projectPath}.framework.common.utils.DateUtils;
+
+/**
+ * $!{table.comment}
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Data
+@Schema(description = "${table.comment}")
+public class ${ClassName}VO implements Serializable {
+    private static final long serialVersionUID = 1L;
+#foreach($field in ${table.fields})
+    #if($!{field.comment})
+    @Schema(description = "${field.comment}")
+    #end
+    #if(${field.propertyType} == 'Date')
+    @JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
+	#end
+    private ${field.propertyType} ${field.propertyName};
+#end
+}

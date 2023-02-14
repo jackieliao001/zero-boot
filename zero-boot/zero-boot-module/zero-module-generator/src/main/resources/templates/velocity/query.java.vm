@@ -1,0 +1,27 @@
+#set ($ClassName=${entity.replace('Entity','')})
+#set ($className=${ClassName.substring(0, 1).toLowerCase()}+${ClassName.substring(1)})
+#set ($moduleName=${package.ModuleName})
+package ${projectPath}.${moduleName}.query;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import ${projectPath}.framework.common.bean.Query;
+
+/**
+ * $!{table.comment}查询
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Schema(description = "${table.comment}查询")
+public class ${ClassName}Query extends Query {
+#foreach($field in ${table.fields})
+    #if($!{field.comment})
+    @Schema(description = "${field.comment}")
+    #end
+    private ${field.propertyType} ${field.propertyName};
+#end
+}

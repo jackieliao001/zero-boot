@@ -1,0 +1,12 @@
+bootJar {
+    enabled(false)
+}
+
+dependencies {
+    implementation project(':zero-boot-module')
+    implementation group: 'com.github.oshi', name: 'oshi-core'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+
+}

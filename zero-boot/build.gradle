@@ -1,0 +1,121 @@
+plugins {
+    id 'java'
+    id 'java-library' // api implementation
+    id 'org.springframework.boot' version '3.0.2'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+// 变量 ${} 形式引用
+ext {
+    set('springCloudAlibabaVersion', "2021.0.4.0")
+    set('springCloudVersion', "2021.0.4")
+    set('log4j2Version', "2.19.0")
+}
+
+allprojects {
+    apply plugin: 'java-library'
+
+    group 'com.fast'
+    version '0.0.1-SNAPSHOT'
+    // 设置编译和运行的jre兼容版本
+    sourceCompatibility = '17'
+    targetCompatibility = '17'
+
+    configurations{
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        mavenCentral()
+    }
+
+    tasks.withType(JavaCompile){
+        options.encoding('UTF-8')
+    }
+}
+
+// 应用于所有依赖的子项目
+subprojects {
+    // 应用插件
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+
+    // spring boot构建任务
+    springBoot {
+        buildInfo()
+    }
+
+    dependencyManagement {
+        // 导入maven依赖管理的bom
+        imports {
+            mavenBom 'cn.hutool:hutool-all:5.8.11'
+        }
+        dependencies {
+//            dependencySet(group: 'org.apache.commons', version: '3.12.0') {
+//                entry 'commons-lang3'
+//            }
+            dependencySet(group: 'com.baomidou', name: 'mybatis-plus-extension', version: '3.5.3.1'){
+                entry 'mybatis-plus-extension'
+                entry 'mybatis-plus-generator'
+                entry 'mybatis-plus-boot-starter'
+            }
+//            dependencySet(group: 'com.baomidou', name: 'mybatis-plus-boot-starter', version: '3.5.3.1'){
+//                entry 'mybatis-plus-boot-starter'
+//            }
+//            dependencySet(group: 'com.baomidou', name: 'mybatis-plus-generator', version: '3.5.3.1'){
+//
+//            }
+            dependencySet(group: 'org.apache.velocity', name: 'velocity-engine-core', version: '2.3'){
+                entry 'velocity-engine-core'
+            }
+            dependencySet(group: 'cn.hutool', name: 'hutool-all', version: '5.8.11'){
+                entry 'hutool-all'
+            }
+            dependencySet(group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.2.8'){
+                entry 'swagger-annotations'
+            }
+            dependencySet(group: 'com.github.jsqlparser', name: 'jsqlparser', version: '4.5'){
+                entry 'jsqlparser'
+            }
+            dependencySet(group: 'com.github.oshi', name: 'oshi-core', version: '6.4.0'){
+                entry 'oshi-core'
+            }
+            dependencySet(group: 'io.minio', version: '8.3.6') {
+                entry 'minio'
+            }
+            dependencySet(group: 'org.mapstruct', name: 'mapstruct', version: '1.5.3.Final') {
+                entry 'mapstruct'
+                entry 'mapstruct-processor'
+            }
+            dependencySet(group: 'com.fhs-opensource', name: 'easy-trans-spring-boot-starter', version: '2.1.6') {
+                entry 'easy-trans-spring-boot-starter'
+                entry 'easy-trans-mybatis-plus-extend'
+            }
+        }
+    }
+
+    /**
+     * 为所有模块指定公共的依赖
+     * 注意这里有些默认不用再指定版本了，已经由上面的dependencyManagement管理了
+     */
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        annotationProcessor 'org.projectlombok:lombok'
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+        testAnnotationProcessor "org.projectlombok:lombok"
+        testCompileOnly "org.projectlombok:lombok"
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        implementation group: 'cn.hutool', name: 'hutool-all'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+

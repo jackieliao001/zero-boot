@@ -1,0 +1,8 @@
+jar {
+    enabled = true
+}
+dependencies {
+    implementation(project(':zero-boot-system'))
+    implementation(project(':zero-boot-module:zero-module-monitor'))
+    implementation(project(':zero-boot-module:zero-module-generator'))
+}

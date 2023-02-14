@@ -1,0 +1,8 @@
+dependencies {
+    implementation project(':zero-framework')
+    implementation project(':zero-boot-api')
+    api('org.springframework.boot:spring-boot-starter-web')
+    api('org.mapstruct:mapstruct')
+//    api('org.mapstruct:mapstruct-processor')
+    annotationProcessor 'org.mapstruct:mapstruct-processor'
+}
