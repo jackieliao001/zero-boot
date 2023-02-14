@@ -1,4 +1,4 @@
-package com.fast.framework.common.utils;
+package com.fast.framework.security.utils;
 
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;

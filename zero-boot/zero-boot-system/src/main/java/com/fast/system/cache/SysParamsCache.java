@@ -72,6 +72,6 @@ public class SysParamsCache {
      * @param paramKey 参数键
      */
     public void del(String... paramKey) {
-        redisCache.hDel(SYSTEM_PARAMS_KEY, paramKey);
+        redisCache.hDel(SYSTEM_PARAMS_KEY, (Object) paramKey);
     }
 }

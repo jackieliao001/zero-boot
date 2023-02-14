@@ -1,11 +1,7 @@
-//jar.enabled(true)
+jar.enabled(true)
 bootJar{
     enabled(false)
 }
 dependencies {
-    implementation project(':zero-framework')
-    compileOnly 'org.hibernate.validator:hibernate-validator'
-    compileOnly 'com.baomidou:mybatis-plus-extension'
-    compileOnly 'com.fasterxml.jackson.core:jackson-annotations'
-    compileOnly 'org.springframework:spring-core'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 }

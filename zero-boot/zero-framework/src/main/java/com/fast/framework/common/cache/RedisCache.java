@@ -128,8 +128,4 @@ public class RedisCache {
     public Object rightPop(String key) {
         return redisTemplate.opsForList().rightPop(key);
     }
-
-    public RedisTemplate getTemplate(){
-        return redisTemplate;
-    }
 }

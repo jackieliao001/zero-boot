@@ -3,7 +3,7 @@ package com.fast.system.service.impl;
 import cn.hutool.core.util.RandomUtil;
 import com.fast.framework.common.constant.Constant;
 import com.fast.framework.common.exception.ServerException;
-import com.fast.framework.common.utils.TokenUtils;
+import com.fast.framework.security.utils.TokenUtils;
 import com.fast.framework.security.config.TokenStoreCache;
 import com.fast.framework.security.mobile.MobileAuthenticationToken;
 import com.fast.framework.security.user.UserDetail;

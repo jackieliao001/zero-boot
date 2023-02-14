@@ -1,7 +1,7 @@
 package com.fast.system.controller;
 
 import com.fast.framework.common.bean.Result;
-import com.fast.framework.common.utils.TokenUtils;
+import com.fast.framework.security.utils.TokenUtils;
 import com.fast.system.service.SysAuthService;
 import com.fast.system.service.SysCaptchaService;
 import com.fast.system.vo.SysAccountLoginVO;

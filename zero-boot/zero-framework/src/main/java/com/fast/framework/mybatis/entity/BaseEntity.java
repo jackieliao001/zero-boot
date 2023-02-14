@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * @date 2023/2/9 14:56
  */
 @Data
-public class BaseEntity implements TransPojo {
+public abstract class BaseEntity implements TransPojo {
     /**
      * id
      */

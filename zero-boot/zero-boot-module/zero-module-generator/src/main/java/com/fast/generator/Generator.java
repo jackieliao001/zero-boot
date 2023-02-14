@@ -172,7 +172,7 @@ public class Generator {
         pathInfo.put(OutputFile.service, ROOT_PATH + moduleAlias + "-service/src/main/java/com/fast/"+module+"/service/");
         pathInfo.put(OutputFile.serviceImpl, ROOT_PATH + moduleAlias + "-service/src/main/java/com/fast/"+module+"/service/impl/");
         pathInfo.put(OutputFile.controller, ROOT_PATH + moduleAlias + "-service/src/main/java/com/fast/"+module+"/controller/");
-        pathInfo.put(OutputFile.other, ROOT_PATH + moduleAlias + "-service/src/main/resources/templates/"+module+"/");
+        // pathInfo.put(OutputFile.other, ROOT_PATH + moduleAlias + "-service/src/main/resources/templates/"+module+"/");
         return pathInfo;
     }
 

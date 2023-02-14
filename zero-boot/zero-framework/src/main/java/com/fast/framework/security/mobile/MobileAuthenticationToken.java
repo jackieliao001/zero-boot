@@ -18,8 +18,6 @@ public class MobileAuthenticationToken extends AbstractAuthenticationToken {
     private final Object principal;
     private String code;
 
-
-
     public MobileAuthenticationToken(Object principal, String code) {
         super(null);
         this.principal = principal;

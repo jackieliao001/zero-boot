@@ -34,9 +34,9 @@ import java.util.List;
  * @date 2023/2/9 17:28
  */
 @Configuration
-@AllArgsConstructor
 @EnableWebSecurity
 @EnableMethodSecurity
+@AllArgsConstructor
 public class SecurityConfig {
     private final OncePerRequestFilter authenticationTokenFilter;
     private final PermitResource permitResource;

@@ -39,7 +39,7 @@ public class CacheController {
         result.put("keyCount", dbSize);
         // Step 3: 获取请求次数
         List<Map<String, Object>> pieList = new ArrayList<>();
-        Properties commandStats = (Properties) redisTemplate.execute((RedisCallback<Object>) connection -> connection.info("commandStats"));
+        Properties commandStats = (Properties) redisTemplate.execute((RedisCallback<Object>) connection -> connection.serverCommands().info("commandStats"));
         if (commandStats != null && commandStats.size() != 0) {
             commandStats.stringPropertyNames().forEach(key -> {
                 Map<String, Object> data = new HashMap<>();

@@ -1,7 +1,7 @@
 package com.fast.framework.security.filter;
 
 import cn.hutool.core.util.StrUtil;
-import com.fast.framework.common.utils.TokenUtils;
+import com.fast.framework.security.utils.TokenUtils;
 import com.fast.framework.security.config.TokenStoreCache;
 import com.fast.framework.security.user.UserDetail;
 import jakarta.servlet.FilterChain;
