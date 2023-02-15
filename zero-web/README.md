@@ -6,6 +6,7 @@
 
 ### 软件架构
 
+```
 ├─public   静态文件
 │
 ├─src      源文件
@@ -36,6 +37,7 @@
 ├─tsconfig.json         TypeScript配置
 ├─vite.config.ts        Vite配置
 
+```
 
 ### 快速入门
 
