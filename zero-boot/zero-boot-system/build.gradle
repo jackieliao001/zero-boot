@@ -3,4 +3,8 @@ bootJar.enabled(false)
 dependencies {
     api project(':zero-framework')
     api project(':zero-boot-api')
+    implementation group: 'com.aliyun.oss', name: 'aliyun-sdk-oss'
+    implementation group: 'com.qcloud', name: 'cos_api'
+    implementation group: 'io.minio', name: 'minio'
+    implementation group: 'com.qiniu', name: 'qiniu-java-sdk'
 }

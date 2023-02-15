@@ -16,6 +16,9 @@ ext {
     easyTransVersion= '2.1.6'
     jsqlparserVersion= '4.5'
     minioVersion= '8.3.6'
+    aliyunOssVersion= '3.16.0'
+    tencentCosVersion= '5.6.133'
+    qiniuOssVersion= '7.12.1'
 }
 
 allprojects {
@@ -65,9 +68,6 @@ subprojects {
             }
             dependency group: 'com.github.jsqlparser', name: 'jsqlparser', version: "${jsqlparserVersion}"
             dependency group: 'com.github.oshi', name: 'oshi-core', version: "${oshiVersion}"
-            dependencySet(group: 'io.minio', version: "${minioVersion}") {
-                entry 'minio'
-            }
             dependencySet(group: 'org.mapstruct', version: "${mapstructVersion}") {
                 entry 'mapstruct'
                 entry 'mapstruct-processor'
@@ -76,6 +76,10 @@ subprojects {
                 entry 'easy-trans-spring-boot-starter'
                 entry 'easy-trans-mybatis-plus-extend'
             }
+            dependency group: 'com.aliyun.oss', name: 'aliyun-sdk-oss', version: "${aliyunOssVersion}"
+            dependency group: 'io.minio', name: 'minio', version: "${minioVersion}"
+            dependency group: 'com.qcloud', name: 'cos_api', version: "${tencentCosVersion}"
+            dependency group: 'com.qiniu', name: 'qiniu-java-sdk', version: "${qiniuOssVersion}"
         }
     }
 
@@ -87,7 +91,6 @@ subprojects {
         testAnnotationProcessor 'org.projectlombok:lombok'
         testCompileOnly 'org.projectlombok:lombok'
 
-        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
         developmentOnly 'org.springframework.boot:spring-boot-devtools'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }

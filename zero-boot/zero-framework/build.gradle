@@ -12,6 +12,7 @@ dependencies {
 
     api 'cn.hutool:hutool-all'
     api 'org.springframework.boot:spring-boot-starter-web'
+    api 'org.springframework.boot:spring-boot-configuration-processor'
     api 'org.springframework.boot:spring-boot-starter-validation'
     api 'org.springframework.boot:spring-boot-starter-security'
     api 'org.springframework.boot:spring-boot-starter-data-redis'

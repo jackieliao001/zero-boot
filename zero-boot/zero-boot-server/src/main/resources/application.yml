@@ -47,7 +47,7 @@ zero:
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
   # 实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.fast.*.entity
+  typeAliasesPackage: com.fast.*.*.entity,com.fast.*.entity
   global-config:
     # 数据库相关配置
     db-config:
