@@ -1,8 +1,0 @@
-bootJar {
-    enabled(false)
-}
-
-dependencies {
-    implementation project(':zero-boot-module')
-    implementation group: 'com.github.oshi', name: 'oshi-core'
-}

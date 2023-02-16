@@ -1,7 +1,0 @@
-bootJar {
-    enabled(false)
-}
-
-dependencies {
-    api project(':zero-framework')
-}
