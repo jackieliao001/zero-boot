@@ -55,7 +55,7 @@ public class Generator {
     /**
      * 数据库
      */
-    private static final String DB = "zero-boot";
+    private static final String DB = "zero_boot";
 
     public static void main(String[] args) {
 //        String a = "SysOrgService";
