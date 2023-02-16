@@ -1,0 +1,30 @@
+#set ($ClassName=${entity.replace('Entity','')})
+#set ($className=${ClassName.substring(0, 1).toLowerCase()}+${ClassName.substring(1)})
+#set ($moduleName=${package.ModuleName})
+package ${projectPath}.${moduleName}.convert;
+
+import ${projectPath}.${moduleName}.entity.${ClassName}Entity;
+import ${projectPath}.${moduleName}.vo.${ClassName}VO;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+import java.util.List;
+
+/**
+ * <p>
+ * $!{table.comment} 转换类类
+ * </p>
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+@Mapper
+public interface ${ClassName}Convert {
+    ${ClassName}Convert INSTANCE = Mappers.getMapper(${ClassName}Convert.class);
+
+    ${ClassName}Entity convert(${ClassName}VO vo);
+
+    ${ClassName}VO convert(${ClassName}Entity entity);
+
+    List<${ClassName}VO> convertList(List<${ClassName}Entity> list);
+}

@@ -1,0 +1,11 @@
+bootJar {
+    enabled(false)
+}
+
+dependencies {
+    implementation project(':zero-framework')
+    implementation "com.baomidou:mybatis-plus-boot-starter"
+    implementation 'com.baomidou:mybatis-plus-generator'
+    implementation 'org.apache.velocity:velocity-engine-core'
+    implementation 'mysql:mysql-connector-java'
+}

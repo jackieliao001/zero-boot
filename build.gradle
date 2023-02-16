@@ -1,0 +1,102 @@
+plugins {
+//    id 'java'
+//    id 'java-library' // api implementation
+    id 'org.springframework.boot' version '3.0.2'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+// 变量 ${} 形式引用
+ext {
+    hutoolVersion = '5.8.11'
+    mysqlVersion= '8.0.32'
+    mybatisPlusVersion= '3.5.3.1'
+    velocityVersion= '2.3'
+    swaggerVersion= '2.2.8'
+    oshiVersion= '6.4.0'
+    mapstructVersion= '1.5.3.Final'
+    easyTransVersion= '2.1.6'
+    jsqlparserVersion= '4.5'
+    minioVersion= '8.3.6'
+    aliyunOssVersion= '3.16.0'
+    tencentCosVersion= '5.6.133'
+    qiniuOssVersion= '7.12.1'
+}
+
+allprojects {
+    group 'com.fast'
+    version '0.0.1-SNAPSHOT'
+
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        mavenCentral()
+    }
+}
+
+// 应用于所有依赖的子项目
+subprojects {
+    // 应用插件
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    // 设置编译和运行的jre兼容版本
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+
+    // 指定编码格式
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    // dependencyManagement版本统一管理，类似于父maven的dependencyManagement
+    dependencyManagement {
+        dependencies {
+            dependencySet(group: 'com.baomidou', version: "${mybatisPlusVersion}") {
+                entry 'mybatis-plus-extension'
+                entry 'mybatis-plus-generator'
+                entry 'mybatis-plus-boot-starter'
+            }
+            dependency group: 'org.apache.velocity', name: 'velocity-engine-core', version: "${velocityVersion}"
+            dependency group: 'cn.hutool',name: 'hutool-all',version: "${hutoolVersion}"
+            dependency group: 'com.mysql', name: 'mysql-connector-j', version: "${mysqlVersion}"
+            dependencySet(group: 'io.swagger.core.v3', version: "${swaggerVersion}") {
+                entry 'swagger-annotations'
+            }
+            dependency group: 'com.github.jsqlparser', name: 'jsqlparser', version: "${jsqlparserVersion}"
+            dependency group: 'com.github.oshi', name: 'oshi-core', version: "${oshiVersion}"
+            dependencySet(group: 'org.mapstruct', version: "${mapstructVersion}") {
+                entry 'mapstruct'
+                entry 'mapstruct-processor'
+            }
+            dependencySet(group: 'com.fhs-opensource', version: "${easyTransVersion}") {
+                entry 'easy-trans-spring-boot-starter'
+                entry 'easy-trans-mybatis-plus-extend'
+            }
+            dependency group: 'com.aliyun.oss', name: 'aliyun-sdk-oss', version: "${aliyunOssVersion}"
+            dependency group: 'io.minio', name: 'minio', version: "${minioVersion}"
+            dependency group: 'com.qcloud', name: 'cos_api', version: "${tencentCosVersion}"
+            dependency group: 'com.qiniu', name: 'qiniu-java-sdk', version: "${qiniuOssVersion}"
+        }
+    }
+
+    // 子项目依赖，类似于在父maven的dependencies
+    dependencies {
+        //lombok
+        annotationProcessor 'org.projectlombok:lombok'
+        compileOnly 'org.projectlombok:lombok'
+        testAnnotationProcessor 'org.projectlombok:lombok'
+        testCompileOnly 'org.projectlombok:lombok'
+
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+}
+

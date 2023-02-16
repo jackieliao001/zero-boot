@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fast.system.dao.SysMenuDao">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.fast.system.entity.SysMenuEntity">
+        <result column="id" property="id"/>
+        <result column="version" property="version"/>
+        <result column="deleted" property="deleted"/>
+        <result column="creator" property="creator"/>
+        <result column="create_time" property="createTime"/>
+        <result column="updater" property="updater"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="pid" property="pid"/>
+        <result column="name" property="name"/>
+        <result column="url" property="url"/>
+        <result column="authority" property="authority"/>
+        <result column="type" property="type"/>
+        <result column="open_style" property="openStyle"/>
+        <result column="icon" property="icon"/>
+        <result column="sort" property="sort"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        version,
+        deleted,
+        creator,
+        create_time,
+        updater,
+        update_time,
+        pid, name, url, authority, type, open_style, icon, sort
+    </sql>
+
+    <select id="getMenuList" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from sys_menu
+        where deleted = 0
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        order by sort
+    </select>
+
+    <select id="getUserMenuList" resultMap="BaseResultMap">
+        select t3.*
+        from sys_user_role t1
+        left join sys_role_menu t2 on t1.role_id = t2.role_id and t2.deleted = 0
+        left join sys_menu t3 on t2.menu_id = t3.id and t3.deleted = 0
+        where t1.user_id = #{userId} and t1.deleted = 0
+        <if test="type != null">
+            and t3.type = #{type}
+        </if>
+        order by t3.sort
+    </select>
+
+    <select id="getUserAuthorityList" resultType="java.lang.String">
+        select t3.authority
+        from sys_user_role t1
+        left join sys_role_menu t2 on t1.role_id = t2.role_id
+        left join sys_menu t3 on t2.menu_id = t3.id
+        where t1.user_id = #{userId}
+          and t1.deleted = 0 and t2.deleted = 0 and t3.deleted = 0
+        order by t3.sort
+    </select>
+
+    <select id="getAuthorityList" resultType="java.lang.String">
+        select authority from sys_menu where deleted = 0
+    </select>
+</mapper>

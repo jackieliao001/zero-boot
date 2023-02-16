@@ -1,0 +1,29 @@
+#set ($ClassName=${entity.replace('Entity','')})
+#set ($className=${ClassName.substring(0, 1).toLowerCase()}+${ClassName.substring(1)})
+#set ($moduleName=${package.ModuleName})
+package ${package.Service};
+
+import ${projectPath}.framework.common.bean.PageResult;
+import ${superServiceClassPackage};
+import ${package.Entity}.${entity};
+import ${projectPath}.${moduleName}.vo.${ClassName}VO;
+import ${projectPath}.${moduleName}.query.${ClassName}Query;
+
+import java.util.List;
+/**
+ * <p>
+ * $!{table.comment} 服务类
+ * </p>
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+    PageResult<${ClassName}VO> page(${ClassName}Query query);
+
+    void save(${ClassName}VO vo);
+
+    void update(${ClassName}VO vo);
+
+    void delete(List<Long> idList);
+}
