@@ -2,7 +2,7 @@ spring:
   data:
     redis:
       database: 5
-      host: 10.207.9.44
+      host: redis
       port: 6379
       password: sanjRedis2021@!
       #timeout: 6000ms  # 连接超时时长（毫秒）

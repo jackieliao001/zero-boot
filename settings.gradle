@@ -6,9 +6,5 @@ findProject(':zero-boot-module:zero-module-monitor')?.name = 'zero-module-monito
 include('zero-boot-module:zero-module-generator')
 findProject(':zero-boot-module:zero-module-generator')?.name = 'zero-module-generator'
 
-//include('zero-boot-service')
-//include('zero-boot-service:zero-service-file')
-//findProject(':zero-boot-service:zero-service-file')?.name = 'zero-service-file'
-
 include 'zero-boot-server'
 
