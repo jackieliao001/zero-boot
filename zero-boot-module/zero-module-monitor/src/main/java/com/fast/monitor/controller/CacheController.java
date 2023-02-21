@@ -3,6 +3,8 @@ package com.fast.monitor.controller;
 import cn.hutool.core.util.StrUtil;
 import com.fast.framework.common.bean.Result;
 import com.fast.monitor.vo.CacheVO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.data.redis.connection.RedisServerCommands;
 import org.springframework.data.redis.core.RedisCallback;
@@ -20,6 +22,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("monitor/cache")
+@Tag(name = "Redis缓存监控")
 @AllArgsConstructor
 public class CacheController {
     private final RedisTemplate<String, Object> redisTemplate;
@@ -27,10 +30,11 @@ public class CacheController {
     /**
      * Redis详情
      */
+    @Operation(summary = "Redis详情")
     @GetMapping("info")
     @PreAuthorize("hasAuthority('monitor:cache:all')")
     public Result<Map<String, Object>> getInfo() {
-        Map<String, Object> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>(4);
         // Step 1: 获取Redis详情
         Properties info = (Properties) redisTemplate.execute((RedisCallback<Object>) RedisServerCommands::info);
         result.put("info", info);
@@ -39,9 +43,9 @@ public class CacheController {
         result.put("keyCount", dbSize);
         // Step 3: 获取请求次数
         List<Map<String, Object>> pieList = new ArrayList<>();
-        Properties commandStats = (Properties) redisTemplate.execute((RedisCallback<Object>) connection -> connection.serverCommands().info("commandStats"));
+        Properties commandStats = (Properties) redisTemplate.execute((RedisCallback<Object>) connection->connection.serverCommands().info("commandStats"));
         if (commandStats != null && commandStats.size() != 0) {
-            commandStats.stringPropertyNames().forEach(key -> {
+            commandStats.stringPropertyNames().forEach(key->{
                 Map<String, Object> data = new HashMap<>();
                 String property = commandStats.getProperty(key);
                 data.put("name", StrUtil.subSufByLength(key, 8));
@@ -56,6 +60,7 @@ public class CacheController {
     /**
      * 获取所有的Key
      */
+    @Operation(summary = "获取所有的Key")
     @GetMapping("getCacheKeys")
     @PreAuthorize("hasAuthority('monitor:cache:all')")
     public Result<Set<String>> getCacheKeys() {
@@ -66,8 +71,9 @@ public class CacheController {
     /**
      * 获取结构化键下的Key值
      *
-     * @param cacheKey
+     * @param cacheKey Key值
      */
+    @Operation(summary = "获取所有的Key")
     @GetMapping("getCacheKeys/{cacheKey}")
     @PreAuthorize("hasAuthority('monitor:cache:all')")
     public Result<Set<String>> getCacheKeys(@PathVariable String cacheKey) {
@@ -78,8 +84,9 @@ public class CacheController {
     /**
      * 获取指定键的值
      *
-     * @param cacheKey
+     * @param cacheKey Key值
      */
+    @Operation(summary = "获取指定键的值")
     @GetMapping("getCacheValue/{cacheKey}")
     @PreAuthorize("hasAuthority('monitor:server:all')")
     public Result<CacheVO> getCacheValue(@PathVariable String cacheKey) {
@@ -93,6 +100,7 @@ public class CacheController {
      *
      * @param cacheKey > Key值
      */
+    @Operation(summary = "删除指定键的缓存")
     @DeleteMapping("delCacheKey/{cacheKey}")
     @PreAuthorize("hasAuthority('monitor:cache:all')")
     public Result<String> delCacheKey(@PathVariable String cacheKey) {
@@ -107,8 +115,9 @@ public class CacheController {
     /**
      * 删除结构化键下的缓存
      *
-     * @param cacheKey > Key值
+     * @param cacheKey Key值
      */
+    @Operation(summary = "删除结构化键下的缓存")
     @DeleteMapping("delCacheKeys/{cacheKey}")
     @PreAuthorize("hasAuthority('monitor:cache:all')")
     public Result<String> delCacheKeys(@PathVariable String cacheKey) {
@@ -120,6 +129,7 @@ public class CacheController {
     /**
      * 删除全部缓存
      */
+    @Operation(summary = "删除全部缓存")
     @DeleteMapping("delCacheAll")
     @PreAuthorize("hasAuthority('monitor:cache:all')")
     public Result<String> delCacheAll() {

@@ -18,7 +18,7 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-data-redis'
     api group: 'com.baomidou', name: 'mybatis-plus-boot-starter'
     api group: 'com.mysql', name: 'mysql-connector-j'
-    api group: 'io.swagger.core.v3', name:'swagger-annotations'
+    api 'com.github.xiaoymin:knife4j-openapi3-jakarta-spring-boot-starter'
     api group: 'com.fhs-opensource', name: 'easy-trans-spring-boot-starter'
     api group: 'com.fhs-opensource', name: 'easy-trans-mybatis-plus-extend'
     implementation 'com.github.jsqlparser:jsqlparser'

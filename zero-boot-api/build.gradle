@@ -1,6 +1,4 @@
 jar.enabled(true)
-bootJar{
-    enabled(false)
-}
+bootJar.enabled(false)
 dependencies {
 }

@@ -1,5 +1,6 @@
 package com.fast.system.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2023/2/13 13:57
  */
 @RestController
+@Tag(name = "首页")
 public class IndexController {
     @GetMapping("/")
     public String index() {

@@ -3,6 +3,8 @@ package com.fast.monitor.controller;
 import com.fast.framework.common.bean.Result;
 import com.fast.monitor.model.*;
 import com.fast.monitor.vo.ServerVO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +20,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("monitor/server")
+@Tag(name = "服务器监控")
 public class ServerController {
 
     /**
      * 服务器相关信息
      */
+    @Operation(summary = "服务器信息")
     @GetMapping("info")
     @PreAuthorize("hasAuthority('monitor:server:all')")
     public Result<ServerVO> getServerInfo() {
@@ -33,6 +37,7 @@ public class ServerController {
     /**
      * CPU相关信息
      */
+    @Operation(summary = "CPU信息")
     @GetMapping("cpu")
     @PreAuthorize("hasAuthority('monitor:server:all')")
     public Result<Cpu> getCpuInfo() {
@@ -43,6 +48,7 @@ public class ServerController {
     /**
      * 内存相关信息
      */
+    @Operation(summary = "内存信息")
     @GetMapping("mem")
     @PreAuthorize("hasAuthority('monitor:server:all')")
     public Result<Mem> getMemInfo() {
@@ -53,6 +59,7 @@ public class ServerController {
     /**
      * JVM相关信息
      */
+    @Operation(summary = "JVM信息")
     @GetMapping("jvm")
     @PreAuthorize("hasAuthority('monitor:server:all')")
     public Result<Jvm> getJvmInfo() {
@@ -61,8 +68,9 @@ public class ServerController {
     }
 
     /**
-     * 系统相关信息
+     * 操作系统相关信息
      */
+    @Operation(summary = "操作系统信息")
     @GetMapping("sys")
     @PreAuthorize("hasAuthority('monitor:server:all')")
     public Result<Sys> getSysInfo() {
@@ -71,8 +79,9 @@ public class ServerController {
     }
 
     /**
-     * 系统文件相关信息
+     * 系统磁盘相关信息
      */
+    @Operation(summary = "系统磁盘信息")
     @GetMapping("disk")
     @PreAuthorize("hasAuthority('monitor:server:all')")
     public Result<List<Disk>> getSysFileInfo() {
